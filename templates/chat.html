@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Adicione seu estilo aqui */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #messages {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat - Usuário: {{ username }}</h1>
+    
+    <!-- Botão de Logout -->
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <div id="messages">
+        {% for message in messages %}
+            <div><strong>{{ message.username }}:</strong> {{ message.message }}</div>
+        {% endfor %}
+    </div>
+
+    <input id="message_input" type="text" placeholder="Digite sua mensagem aqui...">
+    <button id="send_button">Enviar</button>
+
+    <script>
+        $(document).ready(function() {
+            var socket = io();
+
+            // Envia mensagem quando o botão é clicado
+            $('#send_button').click(function() {
+                var message = $('#message_input').val();
+                if (message.trim() !== "") { // Verifica se a mensagem não está vazia
+                    socket.send(message);
+                    $('#message_input').val('');
+                }
+            });
+
+            // Envia mensagem ao pressionar a tecla Enter
+            $('#message_input').keypress(function(event) {
+                if (event.which === 13) { // Verifica se a tecla pressionada é Enter
+                    event.preventDefault(); // Evita a nova linha
+                    $('#send_button').click(); // Aciona o clique do botão de enviar
+                }
+            });
+
+            // Recebe mensagens do servidor
+            socket.on('message', function(msg) {
+                $('#messages').append('<div>' + msg + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight); // Rola para baixo
+            });
+        });
+    </script>
+</body>
+</html>
