@@ -1,4 +1,4 @@
-```markdown
+
 # Chat Kawaii ✨💖
 
 Bem-vinda(o) ao Chat Kawaii, um sistema de chat simples com login, registro e mensagens em tempo real utilizando **Flask**, **Socket.io**, e **SQLite**! 🐾
