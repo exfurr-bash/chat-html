@@ -1,17 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Fofuxo 💖🔐</title>
+  <style>
+    :root {
+      --rosa-fofo: #ffb3ec;
+      --roxo-bebê: #d8b4f8;
+      --fundo: #fff0f9;
+      --borda: #ff9ceb;
+      --fonte-fofa: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--fundo);
+      font-family: var(--fonte-fofa);
+      color: #5a4e74;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: var(--rosa-fofo);
+      text-shadow: 1px 1px 2px #ffc3f7;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border: 3px dashed var(--borda);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 12px;
+      border: 2px solid var(--borda);
+      border-radius: 20px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    button {
+      background: var(--rosa-fofo);
+      border: none;
+      padding: 12px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--roxo-bebê);
+      transform: scale(1.05);
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: var(--rosa-fofo);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <p>Não tem conta? <a href="{{ url_for('register') }}">Registre-se aqui</a>.</p>
+  <h2>Entrar no mundo mágico ✨</h2>
+  <form method="POST">
+    <input type="text" name="username" placeholder="Usuário UwU" required />
+    <input type="password" name="password" placeholder="Senha secreta 🔐" required />
+    <button type="submit">Entrar 💖</button>
+  </form>
+  <p>Não tem conta ainda? <a href="{{ url_for('register') }}">Vem se cadastrar ✨</a></p>
 </body>
 </html>

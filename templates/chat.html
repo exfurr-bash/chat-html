@@ -1,71 +1,161 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        /* Adicione seu estilo aqui */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #messages {
-            border: 1px solid #ccc;
-            padding: 10px;
-            height: 300px;
-            overflow-y: scroll;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            width: 80%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat Fofuxo 💬✨</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    :root {
+      --cor-fundo: #fdf0ff;
+      --cor-mensagem: #ffffffaa;
+      --cor-borda: #ffb3ec;
+      --rosa-fofo: #ff9ceb;
+      --roxo-bebê: #d8b4f8;
+      --text-color: #5d4b7a;
+      --font-kawaii: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-kawaii);
+      background: var(--cor-fundo);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: var(--rosa-fofo);
+      text-shadow: 2px 2px #ffbdf7;
+    }
+
+    a {
+      background: var(--roxo-bebê);
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background: var(--rosa-fofo);
+      transform: scale(1.05);
+    }
+
+    #messages {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      background: var(--cor-mensagem);
+      border: 3px dashed var(--cor-borda);
+      border-radius: 20px;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+
+    #messages div {
+      margin: 10px 0;
+      padding: 8px 12px;
+      background: #ffe6f7;
+      border-radius: 10px;
+      box-shadow: 1px 1px 4px #ffc4f9;
+    }
+
+    .chat-input-area {
+      display: flex;
+      width: 100%;
+      max-width: 600px;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border-radius: 20px;
+      border: 2px solid var(--cor-borda);
+      outline: none;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: var(--rosa-fofo);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--roxo-bebê);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      input[type="text"],
+      button {
+        font-size: 0.9em;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Chat - Usuário: {{ username }}</h1>
-    
-    <!-- Botão de Logout -->
-    <a href="{{ url_for('logout') }}">Logout</a>
+  <h1>Chat Mágico ✨ - Usuário: {{ username }}</h1>
+  <a href="{{ url_for('logout') }}">Sair 🏃‍♀️</a>
 
-    <div id="messages">
-        {% for message in messages %}
-            <div><strong>{{ message.username }}:</strong> {{ message.message }}</div>
-        {% endfor %}
-    </div>
+  <div id="messages">
+    {% for message in messages %}
+      <div><strong>{{ message.username }}:</strong> {{ message.message }}</div>
+    {% endfor %}
+  </div>
 
-    <input id="message_input" type="text" placeholder="Digite sua mensagem aqui...">
-    <button id="send_button">Enviar</button>
+  <div class="chat-input-area">
+    <input id="message_input" type="text" placeholder="Manda tua msg kawaii aqui... ✨"/>
+    <button id="send_button">Enviar 💌</button>
+  </div>
 
-    <script>
-        $(document).ready(function() {
-            var socket = io();
+  <script>
+    $(document).ready(function () {
+      var socket = io();
 
-            // Envia mensagem quando o botão é clicado
-            $('#send_button').click(function() {
-                var message = $('#message_input').val();
-                if (message.trim() !== "") { // Verifica se a mensagem não está vazia
-                    socket.send(message);
-                    $('#message_input').val('');
-                }
-            });
+      $('#send_button').click(function () {
+        var message = $('#message_input').val();
+        if (message.trim() !== "") {
+          socket.send(message);
+          $('#message_input').val('');
+        }
+      });
 
-            // Envia mensagem ao pressionar a tecla Enter
-            $('#message_input').keypress(function(event) {
-                if (event.which === 13) { // Verifica se a tecla pressionada é Enter
-                    event.preventDefault(); // Evita a nova linha
-                    $('#send_button').click(); // Aciona o clique do botão de enviar
-                }
-            });
+      $('#message_input').keypress(function (event) {
+        if (event.which === 13) {
+          event.preventDefault();
+          $('#send_button').click();
+        }
+      });
 
-            // Recebe mensagens do servidor
-            socket.on('message', function(msg) {
-                $('#messages').append('<div>' + msg + '</div>');
-                $('#messages').scrollTop($('#messages')[0].scrollHeight); // Rola para baixo
-            });
-        });
-    </script>
+      socket.on('message', function (msg) {
+        $('#messages').append('<div>' + msg + '</div>');
+        $('#messages').scrollTop($('#messages')[0].scrollHeight);
+      });
+    });
+  </script>
 </body>
 </html>

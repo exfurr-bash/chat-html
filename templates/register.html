@@ -1,16 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrar ✨🐾</title>
+  <style>
+    :root {
+      --cor-fundo: #fff0fb;
+      --cor-borda: #f9a8d4;
+      --cor-principal: #f472b6;
+      --cor-secundaria: #c084fc;
+      --fonte-kawaii: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--fonte-kawaii);
+      background-color: var(--cor-fundo);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #5e4b8b;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--cor-principal);
+      margin-bottom: 20px;
+      text-shadow: 1px 1px #ffc8ee;
+    }
+
+    form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      border: 3px dashed var(--cor-borda);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 12px;
+      border-radius: 20px;
+      border: 2px solid var(--cor-borda);
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--cor-secundaria);
+      box-shadow: 0 0 8px var(--cor-secundaria);
+    }
+
+    button {
+      background-color: var(--cor-principal);
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--cor-secundaria);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 500px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h2>Registro</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Registrar</button>
-    </form>
+  <h2>Criar Conta Mágica 🪄💖</h2>
+  <form method="POST">
+    <input type="text" name="username" placeholder="Seu nome de guerreira mágica ✨" required />
+    <input type="password" name="password" placeholder="Senha super secreta 🐾" required />
+    <button type="submit">Registrar 💫</button>
+  </form>
 </body>
 </html>
