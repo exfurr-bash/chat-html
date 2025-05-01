@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat Fofuxo 💬✨</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     :root {
@@ -123,7 +123,8 @@
 
   <div id="messages">
     {% for message in messages %}
-      <div><strong>{{ message.username }}:</strong> {{ message.message }}</div>
+      {% set texto_sem_id = message.message | regex_replace('\s*id:[^]+', '') %}
+      <div><strong>{{ message.username }}:</strong> {{ texto_sem_id | safe }}</div>
     {% endfor %}
   </div>
 
@@ -134,17 +135,17 @@
 
   <script>
     $(document).ready(function () {
-      var socket = io();
+      const socket = io();
 
-      $('#send_button').click(function () {
-        var message = $('#message_input').val();
+      $('#send_button').click(() => {
+        const message = $('#message_input').val();
         if (message.trim() !== "") {
           socket.send(message);
           $('#message_input').val('');
         }
       });
 
-      $('#message_input').keypress(function (event) {
+      $('#message_input').keypress(event => {
         if (event.which === 13) {
           event.preventDefault();
           $('#send_button').click();
@@ -152,9 +153,19 @@
       });
 
       socket.on('message', function (msg) {
-        $('#messages').append('<div>' + msg + '</div>');
+        const htmlMsg = formatMentions(msg);
+        $('#messages').append('<div>' + htmlMsg + '</div>');
         $('#messages').scrollTop($('#messages')[0].scrollHeight);
       });
+
+      function formatMentions(text) {
+        return text.replace(/@(\w+)/g, (match, username) => {
+          const style = username.toLowerCase() === "kokoro"
+            ? "background-color: #ff9ceb;"
+            : "background-color: #ffe6f7;";
+          return `<span style="${style} padding: 2px 6px; border-radius: 10px; font-weight: bold;">@${username}</span>`;
+        });
+      }
     });
   </script>
 </body>
