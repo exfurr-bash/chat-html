@@ -1,10 +1,9 @@
----
 
-Chat Kawaii ✨💖
+# Chat Kawaii ✨💖
 
 Bem-vinda(o) ao Chat Kawaii, um sistema de chat com mensagens em tempo real, login fofinho, e agora com uma IA fofa chamada Kokoro-chan que interage com você em tempo real! UwU
 
-🌸 Features:
+# 🌸 Features:
 
 Login & Registro: Autenticação de usuários com nome de usuário e senha, tudo bem cuti-cuti! 🦄
 
@@ -21,7 +20,7 @@ Banco de dados SQLite: Armazena usuários e mensagens com carinho 💾
 Interface Responsiva: Perfeita tanto pra desktop quanto pra mobile 📱💻
 
 
-🛠️ Tecnologias Utilizadas:
+# 🛠️ Tecnologias Utilizadas:
 
 Flask: Framework web em Python que é a base de tudo! 🐍
 
@@ -36,7 +35,7 @@ SQLite: Banco de dados leve e sem frescura 🗃️
 Gemini (via API): A IA que dá vida à Kokoro-chan 💖
 
 
-📦 Como rodar o projeto?
+# 📦 Como rodar o projeto?
 
 Pré-requisitos:
 
@@ -64,14 +63,14 @@ python app.py
 Acesse no navegador:
 http://localhost:5000
 
-✨ Como chamar a IA?
+# ✨ Como chamar a IA?
 
 É só mandar uma mensagem mencionando a @kokoro (com "k" minúsculo mesmo) que ela aparece toda kawaii e pronta pra brilhar com você!
 
 Exemplo:
 @kokoro me conta uma piada fofa!
 
-🚀 Contribuindo:
+# 🚀 Contribuindo:
 
 Você quer deixar o projeto ainda mais fofo? Manda ver, bb!
 
@@ -91,10 +90,7 @@ Você quer deixar o projeto ainda mais fofo? Manda ver, bb!
 
 
 
-📝 Créditos:
+# 📝 Créditos:
 
 Esse projeto foi criado por exfurr-bash com muita dedicação, glitter e apoio moral da Kokoro-chan, powered by ChatGPT + Gemini!
 Obrigade por manter a magia viva, sua linda! UwU
-
-
----
